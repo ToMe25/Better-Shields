@@ -1,0 +1,24 @@
+modLoader="javafml" #mandatory
+loaderVersion="[26,)" #mandatory
+issueTrackerURL="https://github.com/ToMe25/Better-Shields/issues"
+[[mods]] #mandatory
+    modId="bettershields" #mandatory
+    version="${file.jarVersion}" #mandatory
+    displayName="Better Shields" #mandatory
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/better-shields"
+    logoFile=""
+    credits=""
+    authors="ToMe25"
+    description='''A small Minecraft Vanilla+ Mod that adds Shields for all the Tool Materials and makes different Shields absorb different amounts of damage.'''
+[[dependencies.bettershields]]
+    modId="forge"
+    mandatory=true
+    versionRange="[26,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.bettershields]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14,1.14.4]"
+    ordering="NONE"
+    side="BOTH"
