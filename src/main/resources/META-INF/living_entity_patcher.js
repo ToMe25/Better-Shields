@@ -31,23 +31,6 @@ function patchShieldLogic(classNode, methodName) {
         }
     }
     target = findFirstReference(method, Opcodes.INVOKEVIRTUAL, canBlockDamageSource);
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getOpcode());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious().getPrevious());
-    //asmapi.log("WARN", "target: " + target.getPrevious());
-    //asmapi.log("WARN", "target: " + target.getNext().getNext().getNext().getNext().getNext().getOpcode());
-    //asmapi.log("WARN", "target: " + target.getNext().getNext().getNext().getNext().getNext().var);
     method.instructions.remove(target.getPrevious().getPrevious());
     method.instructions.remove(target.getPrevious());
     method.instructions.insertBefore(target, new VarInsnNode(Opcodes.ALOAD, 0));
