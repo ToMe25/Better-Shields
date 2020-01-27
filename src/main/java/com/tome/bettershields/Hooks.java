@@ -2,6 +2,8 @@ package com.tome.bettershields;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 
 public class Hooks {
@@ -11,8 +13,15 @@ public class Hooks {
 		if (damage > 0.0F && victim.canBlockDamageSource(source)) {
 			victim.damageShield(damage);
 			f1 = damage;
-			float reduction = 0.75f;
-			if(!source.isProjectile() && reduction < 1)
+			float reduction = 1f;
+			Item shield = victim.getActiveItemStack().getItem();
+			if (shield instanceof BetterShieldItem) {
+				reduction = ((BetterShieldItem) shield).getDamageReduction() / 100f;
+			} else if (shield == Items.SHIELD
+					|| (!Config.customShieldMaxReduction.get() && victim.getActiveItemStack().isShield(victim))) {
+				reduction = 0.75f;
+			}
+			if (!source.isProjectile() && reduction < 1f)
 				f1 = damage * reduction;
 			if (!source.isProjectile()) {
 				Entity entity = source.getImmediateSource();

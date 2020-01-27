@@ -43,12 +43,8 @@ function patchShieldLogic(classNode, methodName) {
     method.instructions.insertBefore(target, new InsnNode(Opcodes.FSUB));
     method.instructions.insertBefore(target, new VarInsnNode(Opcodes.FSTORE, 2));
     method.instructions.insertBefore(target, new VarInsnNode(Opcodes.FLOAD, 5));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.FCONST_1));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.ICONST_2));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.I2F));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.FDIV));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.FSUB));
-    method.instructions.insertBefore(target, new InsnNode(Opcodes.F2I));
+    method.instructions.insertBefore(target, new InsnNode(Opcodes.FCONST_0));
+    method.instructions.insertBefore(target, new InsnNode(Opcodes.FCMPL));
     method.instructions.insertBefore(target, new VarInsnNode(Opcodes.ISTORE, 4));
     method.instructions.insert(target, new InsnNode(Opcodes.ICONST_0));
     method.instructions.remove(target);

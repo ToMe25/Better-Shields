@@ -1,0 +1,32 @@
+{
+  "parent": "bettershields:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bettershields:gold_shield"
+    ]
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bettershields:gold_shield"
+      }
+    },
+    "has_gold_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/gold"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_ingot"
+    ]
+  ]
+}

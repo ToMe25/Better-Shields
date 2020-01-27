@@ -1,0 +1,14 @@
+{
+    "parent": "item/shield",
+    "textures": {
+        "particle": "block/iron_block"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "bettershields:item/iron_shield_blocking"
+        }
+    ]
+}
