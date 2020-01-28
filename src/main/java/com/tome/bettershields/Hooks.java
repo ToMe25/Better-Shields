@@ -2,8 +2,11 @@ package com.tome.bettershields;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.util.DamageSource;
 
 public class Hooks {
@@ -31,6 +34,14 @@ public class Hooks {
 			}
 		}
 		return f1;
+	}
+
+	public static boolean canThornsApply(ItemStack stack) {
+		if (Config.thornsOnShields.get()) {
+			return stack.getItem() instanceof ArmorItem || stack.getItem() instanceof ShieldItem;
+		} else {
+			return stack.getItem() instanceof ArmorItem;
+		}
 	}
 
 }

@@ -25,6 +25,7 @@ public class Config {
 	public static ConfigValue<Integer> ironDurability;
 	public static ConfigValue<Integer> goldDurability;
 	public static ConfigValue<Integer> diamondDurability;
+	public static BooleanValue thornsOnShields;
 
 	public Config() {
 		cfg = CommentedFileConfig
@@ -52,7 +53,10 @@ public class Config {
 				"The portion of the incomming damage Diamond Shields block in percent.");
 		ironDurability = getInt("ironDurability", CATEGORY_GENERAL, 920, "The durability of the Iron Shield.");
 		goldDurability = getInt("goldDurability", CATEGORY_GENERAL, 130, "The durability of the Gold Shield.");
-		diamondDurability = getInt("diamondDurability", CATEGORY_GENERAL, 4600, "The durability of the Diamond Shield.");
+		diamondDurability = getInt("diamondDurability", CATEGORY_GENERAL, 4600,
+				"The durability of the Diamond Shield.");
+		thornsOnShields = getBoolean("thornsOnShields", CATEGORY_GENERAL, true,
+				"Allows the Thorns enchantment to by applied to Shields");
 	}
 
 	private static BooleanValue getBoolean(String name, String category, boolean defaultValue, String comment) {
