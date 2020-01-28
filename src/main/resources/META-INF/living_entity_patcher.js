@@ -52,14 +52,10 @@ function patchShieldLogic(classNode) {
     // replace this.canBlockDamageSource(source) with false
     method.instructions.insert(target, new InsnNode(Opcodes.ICONST_0));
     method.instructions.remove(target);
-    // set flag2 to true for thorns to work properly
-    target = findLastInstruction(method, Opcodes.ISTORE).getPrevious();
-    while(target.getOpcode() != Opcodes.ILOAD) {
-        target = target.getPrevious();
-        method.instructions.remove(target.getNext());
-    }
-    method.instructions.insert(target, new InsnNode(Opcodes.ICONST_1));
-    method.instructions.remove(target);
+    // return whatever Hooks.damageEntityFromReturn returns
+    target = findLastInstruction(method, Opcodes.IRETURN).getPrevious();
+    method.instructions.insertBefore(target, new VarInsnNode(Opcodes.ALOAD, 1));
+    method.instructions.insert(target, new MethodInsnNode(Opcodes.INVOKESTATIC, owner, 'damageEntityFromReturn', '(Lnet/minecraft/util/DamageSource;Z)Z', false));
     return classNode;
 }
 
@@ -75,12 +71,12 @@ function findFirstMethodReference(method, opcode, name) {
 
 function findLastInstruction(method, opcode) {
     var instructions = method.instructions;
-    var lastInstructions = null;
+    var lastInstruction = null;
     for(var i = 0; i < instructions.size(); i++) {
         var instruction = instructions.get(i);
         if(instruction.getOpcode() == opcode) {
-            lastInstructions = instruction;
+            lastInstruction = instruction;
         }
     }
-    return lastInstructions;
+    return lastInstruction;
 }

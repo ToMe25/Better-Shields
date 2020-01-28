@@ -44,4 +44,8 @@ public class Hooks {
 		}
 	}
 
+	public static boolean damageEntityFromReturn(DamageSource source, boolean flag) {
+		return flag || !source.isProjectile();
+	}
+
 }
