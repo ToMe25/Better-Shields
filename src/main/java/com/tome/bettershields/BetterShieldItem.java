@@ -28,10 +28,10 @@ public class BetterShieldItem extends ShieldItem {
 	private Supplier<Integer> damageReduction;
 	private Tag<Item> repairMaterial;
 
-	public BetterShieldItem(String regsitryName, Supplier<Integer> damageReduction, ResourceLocation repairMaterial,
+	public BetterShieldItem(String registryName, Supplier<Integer> damageReduction, ResourceLocation repairMaterial,
 			int durability) {
 		super(new Properties().setTEISR(() -> getTEISR()).group(ItemGroup.COMBAT).maxDamage(durability));
-		setRegistryName(new ResourceLocation(BetterShields.MODID, regsitryName));
+		setRegistryName(new ResourceLocation(BetterShields.MODID, registryName));
 		this.damageReduction = damageReduction;
 		this.repairMaterial = ItemTags.getCollection().getOrCreate(repairMaterial);
 		DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
