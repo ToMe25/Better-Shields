@@ -50,6 +50,6 @@
   "item.bettershields.diamond_shield.magenta": "Magenta Diamond Reinforced Shield",
   "item.bettershields.diamond_shield.orange": "Orange Diamond Reinforced Shield",
   "item.bettershields.diamond_shield.white": "White Diamond Reinforced Shield",
-  "bettershields.shield_damage_reduction": "%d%% Damage Reduction",
+  "bettershields.shield_damage_reduction": " %d%% Damage Reduction",
   "bettershields.shield_blocking": "When blocking:"
 }
