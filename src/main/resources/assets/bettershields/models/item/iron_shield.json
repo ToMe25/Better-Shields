@@ -6,7 +6,7 @@
     "overrides": [
         {
             "predicate": {
-                "blocking": 1
+                "bettershields:blocking": 1
             },
             "model": "bettershields:item/iron_shield_blocking"
         }

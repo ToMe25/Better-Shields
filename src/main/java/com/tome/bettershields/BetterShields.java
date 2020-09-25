@@ -21,21 +21,24 @@ public class BetterShields {
 	public static BetterShieldItem ironShield;
 	public static BetterShieldItem goldShield;
 	public static BetterShieldItem diamondShield;
+	public static BetterShieldItem netheriteShield;
 
 	public BetterShields() {
 		new Config();
 		ironShield = new BetterShieldItem("iron_shield", () -> Config.ironDamageReduction.get(),
-				new ResourceLocation("forge", "ingots/iron"), Config.ironDurability.get());
+				new ResourceLocation("forge", "ingots/iron"), Config.ironDurability.get(), false);
 		goldShield = new BetterShieldItem("gold_shield", () -> Config.goldDamageReduction.get(),
-				new ResourceLocation("forge", "ingots/gold"), Config.goldDurability.get());
+				new ResourceLocation("forge", "ingots/gold"), Config.goldDurability.get(), false);
 		diamondShield = new BetterShieldItem("diamond_shield", () -> Config.diamondDamageReduction.get(),
-				new ResourceLocation("forge", "gems/diamond"), Config.diamondDurability.get());
+				new ResourceLocation("forge", "gems/diamond"), Config.diamondDurability.get(), false);
+		netheriteShield = new BetterShieldItem("netherite_shield", () -> Config.netheriteDamageReduction.get(),
+				new ResourceLocation("forge", "ingots/netherite"), Config.netheriteDurability.get(), true);
 	}
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> e) {
 		final IForgeRegistry<Item> registry = e.getRegistry();
-		registry.registerAll(ironShield, goldShield, diamondShield);
+		registry.registerAll(ironShield, goldShield, diamondShield, netheriteShield);
 	}
 
 	@SubscribeEvent
@@ -50,7 +53,7 @@ public class BetterShields {
 	 * @return the new text component.
 	 */
 	public static ITextComponent getBlockingTextComponent() {
-		return new TranslationTextComponent("bettershields.shield_blocking").applyTextStyle(TextFormatting.GRAY);
+		return new TranslationTextComponent("bettershields.shield_blocking").mergeStyle(TextFormatting.GRAY);
 	}
 
 	/**
@@ -62,7 +65,7 @@ public class BetterShields {
 	 */
 	public static ITextComponent getDamageReductionTextComponent(int reduction) {
 		return new TranslationTextComponent("bettershields.shield_damage_reduction", reduction)
-				.applyTextStyle(TextFormatting.DARK_GREEN);
+				.mergeStyle(TextFormatting.DARK_GREEN);
 	}
 
 }

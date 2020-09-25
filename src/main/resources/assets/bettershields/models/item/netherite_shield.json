@@ -1,14 +1,14 @@
 {
     "parent": "item/shield",
     "textures": {
-        "particle": "block/diamond_block"
+        "particle": "block/netherite_block"
     },
     "overrides": [
         {
             "predicate": {
                 "bettershields:blocking": 1
             },
-            "model": "bettershields:item/diamond_shield_blocking"
+            "model": "bettershields:item/netherite_shield_blocking"
         }
     ]
 }

@@ -22,9 +22,11 @@ public class Config {
 	public static ConfigValue<Integer> ironDamageReduction;
 	public static ConfigValue<Integer> goldDamageReduction;
 	public static ConfigValue<Integer> diamondDamageReduction;
+	public static ConfigValue<Integer> netheriteDamageReduction;
 	public static ConfigValue<Integer> ironDurability;
 	public static ConfigValue<Integer> goldDurability;
 	public static ConfigValue<Integer> diamondDurability;
+	public static ConfigValue<Integer> netheriteDurability;
 	public static BooleanValue thornsOnShields;
 
 	public Config() {
@@ -49,12 +51,16 @@ public class Config {
 				"The portion of the incomming damage Iron Shields block in percent.");
 		goldDamageReduction = getInt("goldDamageReduction", CATEGORY_GENERAL, 85,
 				"The portion of the incomming damage Gold Shields block in percent.");
-		diamondDamageReduction = getInt("diamondDamageReduction", CATEGORY_GENERAL, 100,
+		diamondDamageReduction = getInt("diamondDamageReduction", CATEGORY_GENERAL, 98,
 				"The portion of the incomming damage Diamond Shields block in percent.");
+		netheriteDamageReduction = getInt("netheriteDamageReduction", CATEGORY_GENERAL, 100,
+				"The portion of the incomming damage Netherite Shields block in percent.");
 		ironDurability = getInt("ironDurability", CATEGORY_GENERAL, 920, "The durability of the Iron Shield.");
 		goldDurability = getInt("goldDurability", CATEGORY_GENERAL, 130, "The durability of the Gold Shield.");
 		diamondDurability = getInt("diamondDurability", CATEGORY_GENERAL, 4600,
 				"The durability of the Diamond Shield.");
+		netheriteDurability = getInt("netheriteDurability", CATEGORY_GENERAL, 6300,
+				"The durability of the Netherite Shield.");
 		thornsOnShields = getBoolean("thornsOnShields", CATEGORY_GENERAL, true,
 				"Allows the Thorns enchantment to by applied to Shields");
 	}
