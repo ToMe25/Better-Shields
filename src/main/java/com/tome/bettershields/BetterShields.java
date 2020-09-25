@@ -44,8 +44,24 @@ public class BetterShields {
 		registry.register(ShieldRecipes.SERIALIZER.setRegistryName(new ResourceLocation(MODID, "shield_decoration")));
 	}
 
+	/**
+	 * Creates a {@link TranslationTextComponent} for the when blocking tooltip.
+	 * 
+	 * @return the new text component.
+	 */
+	public static ITextComponent getBlockingTextComponent() {
+		return new TranslationTextComponent("bettershields.shield_blocking").applyTextStyle(TextFormatting.GRAY);
+	}
+
+	/**
+	 * Creates a {@link TranslationTextComponent} for the damage reduction tooltip.
+	 * 
+	 * @param reduction the damage reduction of the shield for which the text
+	 *                  component will be used.
+	 * @return the new text component.
+	 */
 	public static ITextComponent getDamageReductionTextComponent(int reduction) {
-		return new TranslationTextComponent("bettershields.banner_damage_reduction", reduction)
+		return new TranslationTextComponent("bettershields.shield_damage_reduction", reduction)
 				.applyTextStyle(TextFormatting.DARK_GREEN);
 	}
 

@@ -19,6 +19,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -58,8 +59,10 @@ public class BetterShieldItem extends ShieldItem {
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(BetterShields.getDamageReductionTextComponent(getDamageReduction()));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+		tooltip.add(new StringTextComponent(""));
+		tooltip.add(BetterShields.getBlockingTextComponent());
+		tooltip.add(BetterShields.getDamageReductionTextComponent(getDamageReduction()));
 	}
 
 }
