@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ISI",
-    " I "
+    "MCM",
+    " M "
   ],
   "key": {
-    "I": {
-      "tag": "forge:ingots/iron"
-    },
-    "S": {
+    "C": {
       "item": "minecraft:shield"
+    },
+    "M": {
+      "tag": "forge:ingots/gold"
     }
   },
   "result": {
-    "item": "bettershields:iron_shield"
+    "item": "bettershields:gold_shield"
   }
 }

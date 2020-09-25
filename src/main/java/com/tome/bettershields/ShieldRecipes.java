@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class ShieldRecipes extends SpecialRecipe {
 
-	public static final IRecipeSerializer<ShieldRecipes> SERIALIZER = new SpecialRecipeSerializer<ShieldRecipes>(
+	public static final SpecialRecipeSerializer<ShieldRecipes> SERIALIZER = new SpecialRecipeSerializer<ShieldRecipes>(
 			ShieldRecipes::new);
 
 	public ShieldRecipes(ResourceLocation idIn) {

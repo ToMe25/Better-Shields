@@ -33,7 +33,7 @@ public class BetterShieldItem extends ShieldItem {
 		super(new Properties().setTEISR(() -> getTEISR()).group(ItemGroup.COMBAT).maxDamage(durability));
 		setRegistryName(new ResourceLocation(BetterShields.MODID, registryName));
 		this.damageReduction = damageReduction;
-		this.repairMaterial = ItemTags.getCollection().getOrCreate(repairMaterial);
+		this.repairMaterial = new ItemTags.Wrapper(repairMaterial);
 		DispenserBlock.registerDispenseBehavior(this, ArmorItem.DISPENSER_BEHAVIOR);
 	}
 

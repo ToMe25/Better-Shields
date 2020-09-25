@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "DSD",
-    " D "
+    "MCM",
+    " M "
   ],
   "key": {
-    "D": {
-      "tag": "forge:gems/diamond"
-    },
-    "S": {
+    "C": {
       "item": "minecraft:shield"
+    },
+    "M": {
+      "tag": "forge:gems/diamond"
     }
   },
   "result": {
