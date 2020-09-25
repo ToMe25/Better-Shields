@@ -89,6 +89,13 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
+repositories {
+    maven {
+        name = "progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven"
+    }
+}
+
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
@@ -112,6 +119,8 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    runtimeOnly fg.deobf("mezz.jei:jei-$mcversion:$jei_version")
 
 }
 
