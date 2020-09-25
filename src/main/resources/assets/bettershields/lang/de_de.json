@@ -50,6 +50,6 @@
   "item.bettershields.diamond_shield.magenta": "Magenta Diamant verstärkter Schild",
   "item.bettershields.diamond_shield.orange": "Oranger Diamant verstärkter Schild",
   "item.bettershields.diamond_shield.white": "Weißer Diamant verstärkter Schild",
-  "bettershields.shield_damage_reduction": " %d%% Damage Reduction",
-  "bettershields.shield_blocking": "Bein blocken:"
+  "bettershields.shield_damage_reduction": " %d%% Schadensreduzierung",
+  "bettershields.shield_blocking": "Beim blocken:"
 }
