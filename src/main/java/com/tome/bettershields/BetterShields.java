@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,13 +27,13 @@ public class BetterShields {
 	public BetterShields() {
 		new Config();
 		ironShield = new BetterShieldItem("iron_shield", () -> Config.ironDamageReduction.get(),
-				new ResourceLocation("forge", "ingots/iron"), Config.ironDurability.get(), false);
+				Tags.Items.INGOTS_IRON, Config.ironDurability.get(), false);
 		goldShield = new BetterShieldItem("gold_shield", () -> Config.goldDamageReduction.get(),
-				new ResourceLocation("forge", "ingots/gold"), Config.goldDurability.get(), false);
+				Tags.Items.INGOTS_GOLD, Config.goldDurability.get(), false);
 		diamondShield = new BetterShieldItem("diamond_shield", () -> Config.diamondDamageReduction.get(),
-				new ResourceLocation("forge", "gems/diamond"), Config.diamondDurability.get(), false);
+				Tags.Items.GEMS_DIAMOND, Config.diamondDurability.get(), false);
 		netheriteShield = new BetterShieldItem("netherite_shield", () -> Config.netheriteDamageReduction.get(),
-				new ResourceLocation("forge", "ingots/netherite"), Config.netheriteDurability.get(), true);
+				Tags.Items.INGOTS_NETHERITE, Config.netheriteDurability.get(), true);
 	}
 
 	@SubscribeEvent
