@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[33,)" #mandatory
-license="GNU General Public License v3.0"
+license="GNU General Public License v3.0" #mandatory
 issueTrackerURL="https://github.com/ToMe25/Better-Shields/issues"
 [[mods]] #mandatory
     modId="bettershields" #mandatory
