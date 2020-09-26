@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[34,)" #mandatory
+loaderVersion="[33,)" #mandatory
 license="GNU General Public License v3.0"
 issueTrackerURL="https://github.com/ToMe25/Better-Shields/issues"
 [[mods]] #mandatory
@@ -14,12 +14,12 @@ issueTrackerURL="https://github.com/ToMe25/Better-Shields/issues"
 [[dependencies.bettershields]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[33,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.bettershields]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3]"
+    versionRange="[1.16,1.16.3]"
     ordering="NONE"
     side="BOTH"
