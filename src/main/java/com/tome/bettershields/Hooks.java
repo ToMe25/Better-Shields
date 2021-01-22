@@ -22,7 +22,7 @@ public class Hooks {
 				reduction = ((BetterShieldItem) shield).getDamageReduction() / 100f;
 			} else if (shield == Items.SHIELD
 					|| (!Config.customShieldMaxReduction.get() && victim.getActiveItemStack().isShield(victim))) {
-				reduction = 0.75f;
+				reduction = Config.defaultDamageReduction.get() / 100f;
 			}
 			if (!source.isProjectile() && reduction < 1f)
 				f1 = damage * reduction;
