@@ -121,7 +121,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    runtimeOnly fg.deobf("mezz.jei:jei-1.16.2:$jei_version")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.3:$jei_version")
 
 }
 
