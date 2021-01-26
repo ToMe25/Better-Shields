@@ -55,3 +55,6 @@ hs_err_pid*
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
+# Data Generator cache
+/src/generated/resources/.cache/
