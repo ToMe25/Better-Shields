@@ -16,12 +16,8 @@ out
 # gradle
 build
 .gradle
-gradle
-gradlew
-gradlew.bat
 
 # other
-eclipse
 run
 .directory
 
@@ -32,22 +28,7 @@ README.txt
 CREDITS.txt
 changelog.txt
 
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -56,6 +37,15 @@ gradle-app.setting
 *.tar.gz
 *.tar.xz
 *.rar
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
