@@ -53,8 +53,8 @@ public class BetterShieldsRecipeProvider extends RecipeProvider {
 		SmithingRecipeBuilder
 				.smithingRecipe(Ingredient.fromItems(itemToReinforce), Ingredient.fromItems(Items.NETHERITE_INGOT),
 						output)
-				.addCriterion("has_netherite_ingot", hasItem(Items.NETHERITE_INGOT))
-				.build(recipeConsumer, ":smithing/" + output.asItem().getRegistryName().getPath());
+				.addCriterion("has_netherite_ingot", hasItem(Items.NETHERITE_INGOT)).build(recipeConsumer,
+						BetterShields.MODID + ":smithing/" + output.asItem().getRegistryName().getPath());
 	}
 
 }

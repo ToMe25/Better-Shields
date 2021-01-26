@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:smithing/netherite_shield"
+      "bettershields:smithing/netherite_shield"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:smithing/netherite_shield"
+        "recipe": "bettershields:smithing/netherite_shield"
       }
     }
   },
