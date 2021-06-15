@@ -8,7 +8,7 @@ issueTrackerURL="https://github.com/ToMe25/Better-Shields/issues"
     displayName="Better Shields" #mandatory
     displayURL="https://www.curseforge.com/minecraft/mc-mods/better-shields"
     logoFile="BetterShieldsLogo.png"
-    credits="Serj4ever"
+    credits="Serj4ever - Russian Translation, ProSplash - Ukrainian Translation"
     authors="ToMe25"
     description='''A small Minecraft Vanilla+ Mod that adds Shields for all the Tool Materials and makes different Shields absorb different amounts of damage.'''
 [[dependencies.bettershields]]
