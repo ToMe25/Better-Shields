@@ -26,6 +26,7 @@ public class Config {
 	public static ConfigValue<Integer> goldDurability;
 	public static ConfigValue<Integer> diamondDurability;
 	public static BooleanValue thornsOnShields;
+	public static BooleanValue enableDamageReduction;
 
 	public Config() {
 		cfg = CommentedFileConfig
@@ -57,6 +58,8 @@ public class Config {
 				"The durability of the Diamond Shield.");
 		thornsOnShields = getBoolean("thornsOnShields", CATEGORY_GENERAL, true,
 				"Allows the Thorns enchantment to by applied to Shields");
+		enableDamageReduction = getBoolean("enableDamageReduction", CATEGORY_GENERAL, true,
+				"Enables modified damage reduction values for shields.");
 	}
 
 	private static BooleanValue getBoolean(String name, String category, boolean defaultValue, String comment) {
