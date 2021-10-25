@@ -22,10 +22,15 @@ public class TooltipHandler {
 	@SubscribeEvent
 	public static void onTooltip(ItemTooltipEvent e) {
 		if (e.getItemStack().getItem() instanceof ShieldItem) {
+			if (!Config.enableDamageReduction.get()) {
+				return;
+			}
+
 			Item shield = e.getItemStack().getItem();
 			List<ITextComponent> tooltip = e.getToolTip();
 			tooltip.add(new StringTextComponent(""));
 			tooltip.add(BetterShields.getBlockingTextComponent());
+
 			if (shield == Items.SHIELD) {
 				tooltip.add(BetterShields.getDamageReductionTextComponent(Config.defaultDamageReduction.get()));
 			} else if (shield instanceof BetterShieldItem) {
