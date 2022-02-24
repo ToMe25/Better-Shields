@@ -57,7 +57,7 @@ public class BetterShieldItem extends ShieldItem {
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-		return repairMaterial.getValue().test(repair) || super.getIsRepairable(toRepair, repair);
+		return repairMaterial.getValue().test(repair);
 	}
 
 	@Override
