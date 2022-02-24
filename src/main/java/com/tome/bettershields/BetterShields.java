@@ -1,11 +1,11 @@
 package com.tome.bettershields;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,8 +43,8 @@ public class BetterShields {
 	}
 
 	@SubscribeEvent
-	public static void registerRecipes(RegistryEvent.Register<IRecipeSerializer<?>> e) {
-		final IForgeRegistry<IRecipeSerializer<?>> registry = e.getRegistry();
+	public static void registerRecipes(RegistryEvent.Register<RecipeSerializer<?>> e) {
+		final IForgeRegistry<RecipeSerializer<?>> registry = e.getRegistry();
 		registry.register(ShieldRecipes.SERIALIZER.setRegistryName(new ResourceLocation(MODID, "shield_decoration")));
 	}
 
@@ -53,8 +53,8 @@ public class BetterShields {
 	 * 
 	 * @return the new text component.
 	 */
-	public static ITextComponent getBlockingTextComponent() {
-		return new TranslationTextComponent("bettershields.shield_blocking").mergeStyle(TextFormatting.GRAY);
+	public static Component getBlockingTextComponent() {
+		return new TranslatableComponent("bettershields.shield_blocking").withStyle(ChatFormatting.GRAY);
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class BetterShields {
 	 *                  component will be used.
 	 * @return the new text component.
 	 */
-	public static ITextComponent getDamageReductionTextComponent(int reduction) {
-		return new TranslationTextComponent("bettershields.shield_damage_reduction", reduction)
-				.mergeStyle(TextFormatting.DARK_GREEN);
+	public static Component getDamageReductionTextComponent(int reduction) {
+		return new TranslatableComponent("bettershields.shield_damage_reduction", reduction)
+				.withStyle(ChatFormatting.DARK_GREEN);
 	}
 
 }

@@ -6,17 +6,17 @@ import com.tome.bettershields.BetterShieldItem;
 import com.tome.bettershields.BetterShields;
 import com.tome.bettershields.Config;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = BetterShields.MODID)
+@EventBusSubscriber(value = Dist.CLIENT, modid = BetterShields.MODID, bus = EventBusSubscriber.Bus.FORGE)
 public class TooltipHandler {
 
 	@SubscribeEvent
@@ -27,8 +27,8 @@ public class TooltipHandler {
 			}
 
 			Item shield = e.getItemStack().getItem();
-			List<ITextComponent> tooltip = e.getToolTip();
-			tooltip.add(new StringTextComponent(""));
+			List<Component> tooltip = e.getToolTip();
+			tooltip.add(new TextComponent(""));
 			tooltip.add(BetterShields.getBlockingTextComponent());
 
 			if (shield == Items.SHIELD) {

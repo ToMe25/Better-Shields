@@ -2,38 +2,56 @@ package com.tome.bettershields.client;
 
 import java.util.List;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
 import com.tome.bettershields.BetterShields;
 
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.model.ModelBakery;
-import net.minecraft.client.renderer.model.RenderMaterial;
-import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.tileentity.BannerTileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.tileentity.BannerPattern;
-import net.minecraft.tileentity.BannerTileEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
+import net.minecraft.client.renderer.blockentity.BannerRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.level.block.entity.BannerPattern;
+import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@OnlyIn(Dist.CLIENT)
-public class ShieldTileEntityRenderer extends ItemStackTileEntityRenderer {
+@EventBusSubscriber(value = Dist.CLIENT, modid = BetterShields.MODID, bus = EventBusSubscriber.Bus.MOD)
+public class ShieldTileEntityRenderer extends BlockEntityWithoutLevelRenderer {
+
+	public static ShieldTileEntityRenderer instance;
+	
+	public ShieldTileEntityRenderer(BlockEntityRenderDispatcher p_172550_, EntityModelSet p_172551_) {
+		super(p_172550_, p_172551_);
+	}
+	
+	@SubscribeEvent
+	public static void onRegisterReloadListener(RegisterClientReloadListenersEvent event) {
+		instance = new ShieldTileEntityRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+				Minecraft.getInstance().getEntityModels());
+		event.registerReloadListener(instance);
+	}
 
 	@Override
-	public void func_239207_a_(ItemStack stack, TransformType p_239207_2_, MatrixStack matrixStack,
-			IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
-		matrixStack.push();
+	public void renderByItem(ItemStack stack, TransformType p_239207_2_, PoseStack matrixStack,
+			MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+		matrixStack.pushPose();
 		matrixStack.scale(1, -1, -1);
-		boolean flag = stack.getChildTag("BlockEntityTag") != null;
-		RenderMaterial rendermaterial = flag ? ModelBakery.LOCATION_SHIELD_BASE
-				: ModelBakery.LOCATION_SHIELD_NO_PATTERN;
+		boolean flag = stack.getTagElement("BlockEntityTag") != null;
+		Material rendermaterial = flag ? ModelBakery.SHIELD_BASE
+				: ModelBakery.NO_PATTERN_SHIELD;
 
 		Item shield = stack.getItem();
 		if (shield == BetterShields.ironShield) {
@@ -50,20 +68,20 @@ public class ShieldTileEntityRenderer extends ItemStackTileEntityRenderer {
 					: ShieldTextures.LOCATION_NETHERITE_SHIELD_BASE_NOPATTERN;
 		}
 
-		IVertexBuilder ivertexbuilder = rendermaterial.getSprite().wrapBuffer(ItemRenderer.getEntityGlintVertexBuilder(
-				buffer, modelShield.getRenderType(rendermaterial.getAtlasLocation()), true, stack.hasEffect()));
-		this.modelShield.func_228294_b_().render(matrixStack, ivertexbuilder, combinedLight, combinedOverlay, 1.0F,
+		VertexConsumer ivertexbuilder = rendermaterial.sprite().wrap(ItemRenderer.getFoilBufferDirect(
+				buffer, shieldModel.renderType(rendermaterial.atlasLocation()), true, stack.hasFoil()));
+		this.shieldModel.handle().render(matrixStack, ivertexbuilder, combinedLight, combinedOverlay, 1.0F,
 				1.0F, 1.0F, 1.0F);
 		if (flag) {
-			List<Pair<BannerPattern, DyeColor>> list = BannerTileEntity.getPatternColorData(ShieldItem.getColor(stack),
-					BannerTileEntity.getPatternData(stack));
-			BannerTileEntityRenderer.func_241717_a_(matrixStack, buffer, combinedLight, combinedOverlay,
-					this.modelShield.func_228293_a_(), rendermaterial, false, list, stack.hasEffect());
+			List<Pair<BannerPattern, DyeColor>> list = BannerBlockEntity.createPatterns(ShieldItem.getColor(stack),
+					BannerBlockEntity.getItemPatterns(stack));
+			BannerRenderer.renderPatterns(matrixStack, buffer, combinedLight, combinedOverlay,
+					this.shieldModel.plate(), rendermaterial, false, list, stack.hasFoil());
 		} else {
-			this.modelShield.func_228293_a_().render(matrixStack, ivertexbuilder, combinedLight, combinedOverlay, 1.0F,
+			this.shieldModel.plate().render(matrixStack, ivertexbuilder, combinedLight, combinedOverlay, 1.0F,
 					1.0F, 1.0F, 1.0F);
 		}
-		matrixStack.pop();
+		matrixStack.popPose();
 	}
 
 }
