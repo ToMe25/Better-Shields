@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,19 +25,19 @@ public class BetterShields {
 
 	public BetterShields() {
 		new Config();
-		ironShield = new BetterShieldItem("iron_shield", () -> Config.ironDamageReduction.get(),
-				Tags.Items.INGOTS_IRON, Config.ironDurability.get(), false);
-		goldShield = new BetterShieldItem("gold_shield", () -> Config.goldDamageReduction.get(),
-				Tags.Items.INGOTS_GOLD, Config.goldDurability.get(), false);
-		diamondShield = new BetterShieldItem("diamond_shield", () -> Config.diamondDamageReduction.get(),
-				Tags.Items.GEMS_DIAMOND, Config.diamondDurability.get(), false);
-		netheriteShield = new BetterShieldItem("netherite_shield", () -> Config.netheriteDamageReduction.get(),
-				Tags.Items.INGOTS_NETHERITE, Config.netheriteDurability.get(), true);
 	}
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> e) {
 		final IForgeRegistry<Item> registry = e.getRegistry();
+		ironShield = new BetterShieldItem("iron_shield", Config.ironDamageReduction,
+				"forge:ingots/iron", Config.ironDurability.get(), false);
+		goldShield = new BetterShieldItem("gold_shield", Config.goldDamageReduction,
+				"forge:ingots/gold", Config.goldDurability.get(), false);
+		diamondShield = new BetterShieldItem("diamond_shield", Config.diamondDamageReduction,
+				"forge:gems/diamond", Config.diamondDurability.get(), false);
+		netheriteShield = new BetterShieldItem("netherite_shield", Config.netheriteDamageReduction,
+				"forge:ingots/netherite", Config.netheriteDurability.get(), true);
 		registry.registerAll(ironShield, goldShield, diamondShield, netheriteShield);
 	}
 

@@ -1,5 +1,7 @@
 package com.tome.bettershields;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -16,27 +18,30 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.FORGE, modid = BetterShields.MODID)
 public class BetterShieldItem extends ShieldItem {
 
 	private Supplier<Integer> damageReduction;
+	@SuppressWarnings("deprecation")
 	private LazyLoadedValue<Ingredient> repairMaterial;
 
-	public BetterShieldItem(String registryName, Supplier<Integer> damageReduction, Tag<Item> repairMaterial,
-			int durability, boolean fireProof) {
-		this(new ResourceLocation(BetterShields.MODID, registryName), damageReduction,
-				() -> Ingredient.of(repairMaterial), durability, fireProof);
+	public BetterShieldItem(String registryName, ConfigValue<Integer> damageReduction, String repairTag, int durability,
+			boolean fireProof) {
+		this(new ResourceLocation(BetterShields.MODID, registryName), damageReduction::get,
+				() -> getTagIngredient(repairTag), durability, fireProof);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -48,6 +53,46 @@ public class BetterShieldItem extends ShieldItem {
 		this.damageReduction = damageReduction;
 		this.repairMaterial = new LazyLoadedValue<>(repairMaterial);
 		DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
+	}
+
+	/**
+	 * Required for one jar to work in 1.18.1 and 1.18.2.
+	 * A reflection based hack that should not be used unless necessary.
+	 * 
+	 * @param name	The name of the item tag to get.
+	 * @return	The ingredient representing the item tag for the given name.
+	 */
+	private static Ingredient getTagIngredient(String name) {
+		Ingredient ingredient = null;
+
+		try {
+			final Method getAllTags = ObfuscationReflectionHelper.findMethod(ItemTags.class, "m_13193_");
+			final Object allTags = getAllTags.invoke(null);
+			final Class<?> TagCollection = Class.forName("net.minecraft.tags.TagCollection");
+			final Method getTag = ObfuscationReflectionHelper.findMethod(TagCollection, "m_13404_", ResourceLocation.class);
+			Object tag = getTag.invoke(allTags, new ResourceLocation(name));	
+			final Class<?> Tag = Class.forName("net.minecraft.tags.Tag");
+			final Method of = ObfuscationReflectionHelper.findMethod(Ingredient.class, "m_43911_", Tag);
+			ingredient = (Ingredient) of.invoke(null, tag);
+		} catch (ObfuscationReflectionHelper.UnableToFindMethodException e) {
+			// Seems like we are in 1.18.2
+		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		if (ingredient == null) {// Seems like we are in 1.18.2
+			try {
+				final Method bind = ObfuscationReflectionHelper.findMethod(ItemTags.class, "m_203854_", String.class);
+				Object tag = bind.invoke(null, name);
+				final Class<?> TagKey = Class.forName("net.minecraft.tags.TagKey");
+				final Method of = ObfuscationReflectionHelper.findMethod(Ingredient.class, "m_204132_", TagKey);
+				ingredient = (Ingredient) of.invoke(null, tag);
+			} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return ingredient;
 	}
 
 	@Override
